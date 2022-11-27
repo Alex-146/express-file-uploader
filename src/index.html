@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+  <form
+    action="/upload"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <input type="file" name="file" multiple>
+    <div>
+      <ul>
+      </ul>
+      <input type="submit" value="Upload">
+    </div>
+  </form>
+  <script>
+    const input = document.querySelector("input[type='file']")
+    const list = document.querySelector("ul")
+
+    input.addEventListener("change", (e) => {
+      const files = Array.from(e.target.files)
+      showFiles(list, files)
+    })
+
+    function fileEntry(file) {
+      return `<li>${file.name}</li>`
+    }
+
+    function showFiles(container, files) {
+      container.innerHTML = files.map(file => fileEntry(file)).join("")
+    }
+  </script>
+</body>
+</html>
